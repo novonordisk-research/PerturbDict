@@ -377,7 +377,9 @@ class PerturbDict:
     def get_split(self, k: int = 5, fold: int = 0, seed: Optional[int] = None) -> Tuple[List[str], List[str]]:
         """Get k-fold train/test split. Returns (train_perts, test_perts)."""
         self._check_loaded()
-        train, test = get_train_test_split(list(self.perturbations), k=k, fold=fold, seed=seed)
+        # Sort perturbations to ensure consistent ordering across runs
+        sorted_perts = sorted(list(self.perturbations))
+        train, test = get_train_test_split(sorted_perts, k=k, fold=fold, seed=seed)
         return train.tolist(), test.tolist()
 
     def get_split_data(self, k: int = 5, fold: int = 0, seed: Optional[int] = None) -> Tuple[Dict[str, np.ndarray], Dict[str, np.ndarray]]:
