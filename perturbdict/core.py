@@ -13,7 +13,8 @@ from .utils import (
     create_de_ranked_structure,
     apply_thresholds
 )
-from .splits import get_train_test_split, PerturbDataIterator
+from .splits import get_train_test_split
+from .loaders import PerturbDataIterator
 
 # Optional AnnData import
 try:
@@ -64,7 +65,7 @@ class PerturbDict:
         adata,
         perturbation_col: str = 'perturbation',
         exclude_controls: bool = True,
-        control_name: str = 'NT',
+        control_name: str = 'ctrl',
         find_de_genes: bool = True,
         de_method: str = 'ttest'
     ):
